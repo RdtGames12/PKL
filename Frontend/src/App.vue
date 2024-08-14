@@ -21,14 +21,7 @@
             <h6 class="card-subtitle mb-2 text-muted">
               Year: {{ movie.Year }}
             </h6>
-            <a
-              href=""
-              class="card-link see-detail"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              :data-id="movie.imdbID"
-              >See Detail Movies</a
-            >
+            
           </div>
         </div>
       </div>

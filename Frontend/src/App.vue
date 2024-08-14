@@ -21,7 +21,6 @@
             <h6 class="card-subtitle mb-2 text-muted">
               Year: {{ movie.Year }}
             </h6>
-            
           </div>
         </div>
       </div>

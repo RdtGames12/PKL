@@ -6,7 +6,7 @@
         </button>
         <input 
           type="text" 
-          class="form-control-sm " 
+          class="form-control-sm" 
           placeholder="Search Movies..." 
           aria-label="Search Movies" 
           name="search" 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <search @update-query="fetchFilms"></search>
+    <search @update-query="fetchMovie"></search>
     <div class="container">
     <div v-if="movies.length" class="d-flex flex-wrap justify-content-between">
       <div
@@ -55,7 +55,7 @@ export default {
     };
   },
   methods: {
-    fetchFilms(query) {
+    fetchMovie(query) {
       if (query) {
         axios
           .get(`http://www.omdbapi.com?apikey=184a9527&s=${query}`)

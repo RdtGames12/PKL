@@ -1,3 +1,38 @@
+
+<script setup>
+import axios from "axios";
+import { ref, onMounted } from "vue";
+import search from "./components/search.vue";
+
+const movies = ref([]);
+
+const fetchMovie = (query) => {
+  if (query) {
+    axios
+      .get(`http://www.omdbapi.com?apikey=184a9527&s=${query}`)
+      .then((response) => {
+        if (response.data.Search) {
+          movies.value = response.data.Search;
+        } else {
+          movies.value = [];
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        movies.value = [];
+      });
+  } else {
+    movies.value = [];
+  }
+};
+
+
+onMounted( async () => {
+  fetchMovie("batman");
+});
+
+</script>
+
 <template>
   <div>
     <search @update-query="fetchMovie"></search>
@@ -33,42 +68,3 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
-import { ref } from "vue";
-import search from "./components/search.vue";
-
-export default {
-  components: {
-    search,
-  },
-  setup() {
-    const movies = ref([]);
-
-    const fetchMovie = (query) => {
-      if (query) {
-        axios
-          .get(`http://www.omdbapi.com?apikey=184a9527&s=${query}`)
-          .then((response) => {
-            if (response.data.Search) {
-              movies.value = response.data.Search;
-            } else {
-              movies.value = [];
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            movies.value = [];
-          });
-      } else {
-        movies.value = [];
-      }
-    };
-
-    return {
-      movies,
-      fetchMovie,
-    };
-  },
-};
-</script>

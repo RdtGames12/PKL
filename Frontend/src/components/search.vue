@@ -1,3 +1,17 @@
+<script setup>
+import { ref, watch } from "vue";  
+
+const emit = defineEmits(['update-query']);
+
+const searchQuery = ref("");
+
+const emitSearchQuery = () => {
+  emit("update-query", searchQuery.value);
+};
+
+watch(searchQuery, emitSearchQuery);
+</script>
+
 <template>
   <div class="mb-4">
     <div class="input-group d-flex justify-content-center">
@@ -16,25 +30,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import { ref, watch } from "vue";
-
-export default {
-  setup(props, { emit }) {
-    const searchQuery = ref("");
-
-    const emitSearchQuery = () => {
-      emit("update-query", searchQuery.value);
-    };
-
-    // Emit search query whenever it changes
-    watch(searchQuery, emitSearchQuery);
-
-    return {
-      searchQuery,
-      emitSearchQuery,
-    };
-  },
-};
-</script>

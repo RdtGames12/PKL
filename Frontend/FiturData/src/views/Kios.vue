@@ -93,7 +93,7 @@ onMounted(() => {
                     'text-red-600': !detail.isActive,
                   }"
                 >
-                  {{ detail.isActive }}
+                  {{ detail.isActive ? 'ON' : 'OFF' }}
                 </span>
               </div>
             </div>

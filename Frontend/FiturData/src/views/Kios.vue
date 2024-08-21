@@ -26,14 +26,9 @@ const fetchData = async () => {
 
 const filteredData = computed(() => {
   if (!searchQuery.value) return data.value;
-  return data.value
-    .map((item) => ({
-      ...item,
-      features: item.features.filter((feature) =>
-        feature.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-      ),
-    }))
-    .filter((item) => item.features.length > 0);
+  return data.value.filter((item) =>
+    item.operator.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
 });
 
 const toggleAccordion = (parentIndex, childIndex) => {
@@ -46,6 +41,7 @@ onMounted(() => {
 });
 </script>
 
+
 <template>
   <nav-bar />
   <div class="bg-gray-100 min-h-screen">
@@ -54,7 +50,7 @@ onMounted(() => {
         Data Kiosk
       </h1>
       <SearchBar v-model="searchQuery" class="mb-8" />
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8">
         <div
           v-for="(item, index) in filteredData"
           :key="index"
@@ -76,9 +72,21 @@ onMounted(() => {
               v-show="activeAccordion[index] === idx"
               class="mt-2 bg-gray-100 p-4 rounded-lg"
             >
-              <h3 class="text-sm font-bold text-gray-700 mb-4">
+              <h3
+                class="text-sm font-bold text-gray-700 mb-4 flex justify-between"
+              >
                 {{ feature.description }}
+                <span
+                  :class="{
+                    'text-green-600': feature.isActive,
+                    'text-red-600': !feature.isActive,
+                  }"
+                  class="ml-auto"
+                >
+                  {{ feature.isActive ? "ON" : "OFF" }}
+                </span>
               </h3>
+
               <div
                 v-for="(detail, i) in feature.items"
                 :key="i"
@@ -87,13 +95,13 @@ onMounted(() => {
                 <span class="text-gray-800"
                   >{{ detail.title }}: {{ detail.description }}</span
                 >
-                <span
+                <span class="font-bold"
                   :class="{
                     'text-green-600': detail.isActive,
                     'text-red-600': !detail.isActive,
                   }"
                 >
-                  {{ detail.isActive ? 'ON' : 'OFF' }}
+                  {{ detail.isActive ? "ON" : "OFF" }}
                 </span>
               </div>
             </div>

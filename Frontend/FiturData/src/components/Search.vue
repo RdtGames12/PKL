@@ -17,8 +17,8 @@ watch(Search, (newVal) => {
       <input
           v-model="Search"
           type="text"
-          placeholder="Cari fitur..."
-          class="w-[700px] p-2 border rounded-md text-center mb-6"
+          placeholder="Cari Opearator..."
+          class="w-[1080px] p-2 border rounded-md text-center mb-6"
       />
   </div>
 

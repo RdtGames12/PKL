@@ -5,13 +5,13 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const menus = reactive([
-  { title: 'Kiosk', description: 'Lihat Fitur Yang Tersedia di Kiosk', route: '/Kios' },
-  { title: 'Tiketux', description: 'Lihat Fitur Yang Tersedia di Tiketux', route: '/Tiketuk' },
-  { title: 'White List', description: 'Lihat Fitur Yang Tersedia di White List', route: '/Wl' }
+  { title: 'Kiosk', description: 'Lihat Fitur Yang Tersedia di Kiosk', route: 'Kios' },
+  { title: 'Tiketux', description: 'Lihat Fitur Yang Tersedia di Tiketux', route: 'Tiketuk' },
+  { title: 'White Label', description: 'Lihat Fitur Yang Tersedia di White Label', route: 'Wl' }
 ]);
 
 function goToMenu(route) {
-  router.push(route);
+  router.push({ name: route });
 }
 </script>
 
@@ -20,7 +20,7 @@ function goToMenu(route) {
   <div class=" bg-gray-100 min-h-screen">
  <div class="p-8 max-w-6xl mx-auto">
     <h1 class="text-3xl font-bold mb-12 text-center">Menu</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <div
         v-for="(menu, index) in menus"
         :key="index"

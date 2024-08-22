@@ -6,7 +6,7 @@ const router = useRouter();
 
 const menus = reactive([
   { title: 'Kiosk', description: 'Lihat Fitur Yang Tersedia di Kiosk', route: 'Kios' },
-  { title: 'Tiketux', description: 'Lihat Fitur Yang Tersedia di Tiketux', route: 'Tiketuk' },
+  { title: 'Tiketux', description: 'Lihat Fitur Yang Tersedia di Tiketux', route: 'Tiketux' },
   { title: 'White Label', description: 'Lihat Fitur Yang Tersedia di White Label', route: 'Wl' }
 ]);
 

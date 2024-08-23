@@ -52,7 +52,7 @@ const getDate = (date) =>
           <td>
             <img
               :src="
-                user.avatar ? 'storage/' + user.avatar : 'storage/avatars/default.jpeg'
+                user.avatar ? 'storage/app/public/avatars' + user.avatar : 'storage/app/public/avatars/default.jpeg'
               "
               class="avatar"
             />

@@ -19,8 +19,8 @@
             class="avatar"
             :src="
               $page.props.auth.user.avatar
-                ? 'storage/' + $page.props.auth.user.avatar
-                : 'storage/avatars/default.jpeg'
+                ? 'storage/app/public/avatars' + $page.props.auth.user.avatar
+                : 'storage/app/public/avatars/default.jpeg'
             "
             alt=""
           />

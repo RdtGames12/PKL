@@ -122,6 +122,41 @@ return [
         ],
         'child'      => [],
     ],
+
+    [
+        'code'         => 'category',
+        'name'         => "Categories",
+        'url'          => "/categories",
+        'label'         => "categories",
+        'icon'         => "categories",
+        'route_name' => "categories",
+        'module'     => [
+            'code' => 'categories',
+            'task' => [
+                [
+                    'code' => 'create',
+                    'name' => 'Create'
+                ],
+                [
+                    'code' => 'read',
+                    'name' => 'Read'
+                ],
+                [
+                    'code' => 'update',
+                    'name' => 'Update'
+                ],
+                [
+                    'code' => 'delete',
+                    'name' => 'Delete'
+                ],
+                [
+                    'code' => 'restore',
+                    'name' => 'Restore'
+                ]
+            ]
+        ],
+        'child'      => [],
+    ],
     //example
     // [
     //     'code'         => 'pencatatan',

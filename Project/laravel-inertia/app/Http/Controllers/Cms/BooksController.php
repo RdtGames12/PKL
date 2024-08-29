@@ -59,8 +59,16 @@ class BooksController extends Controller
         //Redirect to Index
         return redirect()->route('books.index')->with('success', 'Book added successfully!');    }
 
-        public function edit() {
-            return Inertia::render('Books/Edit');
+        public function edit(Book $book) {
+            return Inertia::render('Books/Edit', [
+                'book' => [
+                    'id' => $book->id,
+                    'title' => $book->title,
+                    'author' => $book->author,
+                    'publisher' => $book->publisher,
+                    'category_id' => $book->category_id
+                ],
+            ]);
         }
     
         public function update(Request $request, Book $book) {

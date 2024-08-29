@@ -14,7 +14,7 @@
                   <select-input v-model="form.category_id" :error="form.errors.category_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Category">
                       <option :value="null">Select Category</option>
                       <option v-for="category in categories" :key="category.id" :value="category.id">
-                          {{ category.name }}
+                          {{ category.category }}
                       </option>
                   </select-input>
               </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Cms\BooksController;
+use App\Http\Controllers\Cms\CategoriesController;
 use App\Http\Controllers\Cms\ProfilesController;
 use App\Http\Controllers\Cms\DashboardController;
 use App\Http\Controllers\Cms\PermissionsController;
@@ -74,6 +75,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('books/{book}/edit', [BooksController::class, 'edit'])->name('books.edit');
     Route::put('books/{book}', [BooksController::class, 'update'])->name('books.update');
     Route::delete('books/{book}', [BooksController::class, 'destroy'])->name('books.destroy');
+
+    // Categories
+    Route::get('categories', [CategoriesController::class, 'index'])->name('categories');
+    
 
     //Menu
     Route::get('menu', function () {

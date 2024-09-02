@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Books
     Route::get('books', [BooksController::class, 'index'])->name('books');
-    Route::resource('books',\App\Http\Controllers\cms\booksController::class);
+    Route::resource('books', \App\Http\Controllers\cms\booksController::class);
     Route::get('books/create', [BooksController::class, 'create'])->name('books.create');
     Route::post('books', [BooksController::class, 'store'])->name('books.store');
     Route::get('books/{book}/edit', [BooksController::class, 'edit'])->name('books.edit');

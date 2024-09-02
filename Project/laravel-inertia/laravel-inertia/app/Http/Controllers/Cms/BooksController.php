@@ -56,7 +56,7 @@ class BooksController extends Controller
             'category_id' => $request->category_id
         ]);
 
-        
+        //Redirect to Index
         return redirect()->route('books.index')->with('success', 'Book added successfully!');    }
 
         public function edit(Book $book) {

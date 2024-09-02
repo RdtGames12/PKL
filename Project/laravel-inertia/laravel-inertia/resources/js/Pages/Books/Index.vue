@@ -29,11 +29,6 @@
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.author }}</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.publisher }}</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.category_name }}</td>
-          <td class="w-px border-t">
-            <Link class="flex items-center px-4" :href="`/users/${user.id}/edit`" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </Link>
-          </td>
         </tr>
       </tbody>
     </table>
@@ -64,6 +59,7 @@ export default {
   },
   watch: {
     'form.search': function (newSearch) {
+      // Logika untuk pencarian, bisa menggunakan Inertia untuk mengirim request pencarian
       this.$inertia.get('/books', { search: newSearch }, { preserveState: true });
     },
   },

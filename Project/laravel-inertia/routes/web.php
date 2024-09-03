@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('books/{book}', [BooksController::class, 'destroy'])->name('books.destroy');
 
     // Categories
-    Route::get('categories', [CategoriesController::class, 'index'])->name('categories');
+    Route::get('categories', [CategoriesController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
     Route::get('/categories/{id}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');

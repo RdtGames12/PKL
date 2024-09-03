@@ -65,6 +65,9 @@ export default {
   methods: {
     async submit() {
       this.$inertia.put(`/books/${this.book.id}`, this.form, {
+        onSuccess: () => {
+          this.$inertia.visit(route('books.index')); // Menggunakan rute yang sudah didefinisikan
+        },
         onError: (errors) => {
           this.errors = errors;
         },

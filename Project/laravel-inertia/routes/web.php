@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('users/{user}/restore', [UsersController::class, 'restore'])->name('users.restore');
 
     // Books
-    Route::get('books', [BooksController::class, 'index'])->name('books');
+    Route::get('/books', [BooksController::class, 'index'])->name('books.index');
     // Route::resource('books',\App\Http\Controllers\cms\booksController::class);
     Route::get('books/create', [BooksController::class, 'create'])->name('books.create');
     Route::post('books', [BooksController::class, 'store'])->name('books.store');

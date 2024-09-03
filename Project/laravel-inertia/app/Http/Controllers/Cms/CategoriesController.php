@@ -23,6 +23,9 @@ class CategoriesController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Categories/Index');
+        $categories = Category::all();
+        return Inertia::render('Categories/Index', [
+            'categories' => $categories
+        ]);
     }
 }

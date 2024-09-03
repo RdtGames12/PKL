@@ -29,9 +29,9 @@ class BooksController extends Controller
         $books = Book::join('categories', 'books.category_id', '=', 'categories.id')
                 ->select('books.*', 'categories.category as category_name')
                 ->get();
-        return Inertia::render('Books/Index', [
-            'books' => $books
-        ]);
+        return inertia('Books/Index', [
+            'books' => $books]
+        );
     }
     public function create()
     {

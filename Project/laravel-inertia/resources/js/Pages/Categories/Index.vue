@@ -6,7 +6,7 @@
     <div class="flex items-center justify-between mb-6">
       <SearchFilter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
         <label class="block text-gray-700">Search:</label>
-        <input v-model="form.search" type="text" class="form-input mt-1 w-full" placeholder="Search books...">
+        <input v-model="form.search" type="text" class="form-input mt-1 w-full" placeholder="Search categories...">
       </SearchFilter>
       <Link class="btn-indigo" href="/categories/create">
         <span>Add</span>
@@ -50,8 +50,9 @@ export default {
   },
   layout: Layout,
   props: {
-    books: Array,
-  },
+  categories: Array, // Ubah 'books' menjadi 'categories'
+},
+
   data() {
     return {
       form: {

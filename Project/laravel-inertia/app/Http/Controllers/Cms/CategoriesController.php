@@ -21,11 +21,54 @@ use Illuminate\Support\Facades\Redirect;
 
 class CategoriesController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $search = $request->input('search');
+        $categories = Category::when($search, function ($query, $search) {
+            $query->where('category', 'like', "%{$search}%");
+        })->get();
+
+        return inertia('Categories/Index', ['categories' => $categories]);
+    }
+
+    public function create()
+    { 
+        return inertia('Categories/Create');
+    }
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'category' => 'required|string|max:255',
+        ]);
+
+        Category::create([
+            'category' => $request->category,
+        ]);
+
         return Inertia::render('Categories/Index', [
-            'categories' => $categories
+            'categories' => Category::all(),
+            'success' => 'Category added successfully!'
         ]);
     }
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return inertia('Categories/Edit', [
+            'category' => $category
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'category' => 'required|string|max:255',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+    }
+
+
 }

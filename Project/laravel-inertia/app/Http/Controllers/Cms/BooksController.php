@@ -70,7 +70,6 @@ class BooksController extends Controller
         ]);
     }
 
-    // Metode untuk memperbarui data buku
     public function update(Request $request, $id)
     {
         $request->validate([

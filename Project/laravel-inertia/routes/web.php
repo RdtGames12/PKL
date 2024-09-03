@@ -72,8 +72,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::resource('books',\App\Http\Controllers\cms\booksController::class);
     Route::get('books/create', [BooksController::class, 'create'])->name('books.create');
     Route::post('books', [BooksController::class, 'store'])->name('books.store');
-    Route::get('books/{book}/edit', [BooksController::class, 'edit'])->name('books.edit');
-    Route::put('books/{book}', [BooksController::class, 'update'])->name('books.update');
+    Route::get('/books/{id}/edit', [BooksController::class, 'edit'])->name('books.edit');
+    Route::put('/books/{id}', [BooksController::class, 'update'])->name('books.update');
     Route::delete('books/{book}', [BooksController::class, 'destroy'])->name('books.destroy');
 
     // Categories

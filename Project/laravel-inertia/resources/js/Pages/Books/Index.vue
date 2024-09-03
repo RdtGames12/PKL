@@ -35,7 +35,6 @@
               EDIT
             </Link>
           </td>
-
         </tr>
       </tbody>
     </table>

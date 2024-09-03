@@ -59,29 +59,32 @@ class BooksController extends Controller
         
         return redirect()->route('books.index')->with('success', 'Book added successfully!');    }
 
-        public function edit(Book $book)
-{
-    return Inertia::render('Books/Edit');
-}
+        public function edit($id)
+    {
+        $book = Book::with('category')->findOrFail($id);
+        $categories = Category::all(); // Mengambil semua kategori untuk pilihan dropdown
 
-    
-        public function update(Request $request, Book $book) {
-            $this->validate($request, [
-                'title' => 'required|string|max:255',
-                'author' => 'required|string|max:255',
-                'publisher' => 'required|string|max:255',
-                'category_id' => 'required|exists:categories,id'
-            ]);
-    
-            $book->update([
-                'title'     => $request->title,
-                'author'    => $request->author,
-                'publisher' => $request->publisher,
-                'category_id' => $request->category_id
-            ]);
-    
-            return redirect()->route('books.index')->with('success', 'Book Updated Successfully!');
-        }
+        return inertia('Books/Edit', [
+            'book' => $book,
+            'categories' => $categories
+        ]);
+    }
+
+    // Metode untuk memperbarui data buku
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $book = Book::findOrFail($id);
+        $book->update($request->all());
+
+        return redirect()->route('books.index')->with('success', 'Book updated successfully.');
+    }
     
         public function destroy(Book $book)
         {

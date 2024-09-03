@@ -59,17 +59,11 @@ class BooksController extends Controller
         
         return redirect()->route('books.index')->with('success', 'Book added successfully!');    }
 
-        public function edit(Book $book) {
-            return Inertia::render('Books/Edit', [
-                'book' => [
-                    'id' => $book->id,
-                    'title' => $book->title,
-                    'author' => $book->author,
-                    'publisher' => $book->publisher,
-                    'category_id' => $book->category_id
-                ],
-            ]);
-        }
+        public function edit(Book $book)
+{
+    return Inertia::render('Books/Edit');
+}
+
     
         public function update(Request $request, Book $book) {
             $this->validate($request, [
@@ -95,5 +89,12 @@ class BooksController extends Controller
     
             return redirect()->route('books.index')->with('success', 'Book Deleted Successfully!');
         }
+
+        public function restore(Book $book): RedirectResponse
+    {
+        $book->restore();
+
+        return Redirect::back()->with('success', 'Book restored.');
+    }
 }
 

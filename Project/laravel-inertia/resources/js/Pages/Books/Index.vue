@@ -30,10 +30,12 @@
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.publisher }}</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.category_name }}</td>
           <td class="w-px border-t">
-            <Link class="flex items-center px-4" :href="`/users/${user.id}/edit`" tabindex="-1">
+            <Link :href="`/books/${book.id}/edit`" :preserve-scroll :preserve-state class="flex items-center px-4" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+              EDIT
             </Link>
           </td>
+
         </tr>
       </tbody>
     </table>

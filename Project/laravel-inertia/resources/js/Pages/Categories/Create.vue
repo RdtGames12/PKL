@@ -48,5 +48,14 @@ export default {
             });
         },
     },
+    destroy() {
+          if (confirm('apakah anda yakin ini mengahapus categori ini bro?')) {
+              this.$inertia.delete(`/books/${this.categories.id}`, {
+                  onSuccess: () => {
+                      this.$inertia.visit('/books');
+                  }
+              });
+          }
+      },
 }
 </script>

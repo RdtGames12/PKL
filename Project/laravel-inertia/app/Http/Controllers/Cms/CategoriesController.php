@@ -57,6 +57,7 @@ class CategoriesController extends Controller
             'category' => $category
         ]);
     }
+    
 
     public function update(Request $request, $id)
     {
@@ -70,5 +71,11 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        return redirect()->route('categories.index')->with('success', 'category Deleted Successfully!');
+    }
 
 }

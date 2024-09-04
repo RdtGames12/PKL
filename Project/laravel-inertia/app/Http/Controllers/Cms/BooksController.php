@@ -28,18 +28,17 @@ class BooksController extends Controller
     {
         $search = $request->input('search');
 
-        // Dapatkan daftar buku dengan filter pencarian
-        $books = Book::with('category') // Include relation with category if needed
-            ->when($search, function ($query, $search) {
-                $query->where('title', 'like', "%{$search}%")
-                      ->orWhere('author', 'like', "%{$search}%")
-                      ->orWhere('publisher', 'like', "%{$search}%");
-            })
-            ->get();
-
-        return Inertia::render('Books/Index', [
-            'books' => $books
-        ]);
+        $books = Book::join('categories', 'books.category_id', '=', 'categories.id')
+                ->select('books.*', 'categories.category as category_name')
+                ->when($search, function ($query, $search) {
+                    $query->where('title', 'like', "%{$search}%")
+                          ->orWhere('author', 'like', "%{$search}%")
+                          ->orWhere('publisher', 'like', "%{$search}%");
+                })
+                ->get();
+        return inertia('Books/Index', [
+            'books' => $books]
+        );
     }
     public function create()
     {

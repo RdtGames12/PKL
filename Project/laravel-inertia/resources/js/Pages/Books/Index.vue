@@ -4,6 +4,7 @@
     <h1 class="mb-8 text-3xl font-bold">Books</h1>
 
     <div class="flex items-center justify-between mb-6">
+      <!-- Search Filter -->
       <SearchFilter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
         <label class="block text-gray-700">Search:</label>
         <input v-model="form.search" type="text" class="form-input mt-1 w-full" placeholder="Search books...">
@@ -14,6 +15,7 @@
       </Link>
     </div>
 
+    <!-- Books Table -->
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>
@@ -33,7 +35,7 @@
           <td class="w-px border-t">
             <Link :href="`/books/${book.id}/edit`" :preserve-scroll :preserve-state class="flex items-center px-4" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-              EDIT
+              Lihat Detail
             </Link>
           </td>
         </tr>
@@ -66,6 +68,7 @@ export default {
   },
   watch: {
     'form.search': function (newSearch) {
+      // Kirim permintaan pencarian dengan Inertia.js
       this.$inertia.get('/books', { search: newSearch }, { preserveState: true });
     },
   },

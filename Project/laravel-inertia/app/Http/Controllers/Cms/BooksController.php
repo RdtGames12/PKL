@@ -24,14 +24,22 @@ class BooksController extends Controller
 
     protected $manaCms;
 
-    public function index(): Response
+    public function index(Request $request)
     {
-        $books = Book::join('categories', 'books.category_id', '=', 'categories.id')
-                ->select('books.*', 'categories.category as category_name')
-                ->get();
-        return inertia('Books/Index', [
-            'books' => $books]
-        );
+        $search = $request->input('search');
+
+        // Dapatkan daftar buku dengan filter pencarian
+        $books = Book::with('category') // Include relation with category if needed
+            ->when($search, function ($query, $search) {
+                $query->where('title', 'like', "%{$search}%")
+                      ->orWhere('author', 'like', "%{$search}%")
+                      ->orWhere('publisher', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return Inertia::render('Books/Index', [
+            'books' => $books
+        ]);
     }
     public function create()
     {

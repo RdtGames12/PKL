@@ -3,7 +3,7 @@
     <Head title="Edit Category" />
     <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/categories">Categories</Link>
-      <span class="text-indigo-400 font-medium">/</span> Edit
+      <span class="text-indigo-400 font-medium">/</span> {{ category.category }}
     </h1>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">

@@ -3,7 +3,7 @@
       <Head title="Edit Book" />
       <h1 class="mb-8 text-3xl font-bold">
           <Link class="text-indigo-400 hover:text-indigo-600" href="/books">Books</Link>
-          <span class="text-indigo-400 font-medium">/</span> Edit
+          <span class="text-indigo-400 font-medium">/</span> {{ book.title }}
       </h1>
       <trashed-message v-if="book.deleted_at" class="mb-6" @restore="restore"> This book has been deleted. </trashed-message>
       <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">

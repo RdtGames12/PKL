@@ -29,7 +29,7 @@
           <td class="w-px border-t">
             <Link :href="`/categories/${category.id}/edit`" :preserve-scroll :preserve-state class="flex items-center px-4" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-              EDIT
+              Lihat Detail
             </Link>
           </td>
         </tr>

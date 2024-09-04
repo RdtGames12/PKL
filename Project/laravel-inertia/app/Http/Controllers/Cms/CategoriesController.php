@@ -71,11 +71,16 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
-    public function destroy(Category $category)
-    {
-        $category->delete();
+    public function destroy($id)
+{
 
-        return redirect()->route('categories.index')->with('success', 'category Deleted Successfully!');
-    }
+    $category = Category::findOrFail($id);
+
+    $category->delete();
+
+    return redirect()->route('categories.index')->with('success', 'Category and related books deleted successfully!');
+}
+
+
 
 }

@@ -68,17 +68,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('users/{user}/restore', [UsersController::class, 'restore'])->name('users.restore');
 
     // Books
-    Route::get('books', [BooksController::class, 'index'])->name('books');
-    Route::resource('books',\App\Http\Controllers\cms\booksController::class);
+    Route::get('/books', [BooksController::class, 'index'])->name('books.index');
+    // Route::resource('books',\App\Http\Controllers\cms\booksController::class);
     Route::get('books/create', [BooksController::class, 'create'])->name('books.create');
     Route::post('books', [BooksController::class, 'store'])->name('books.store');
-    Route::get('books/{book}/edit', [BooksController::class, 'edit'])->name('books.edit');
-    Route::put('books/{book}', [BooksController::class, 'update'])->name('books.update');
+    Route::get('/books/{id}/edit', [BooksController::class, 'edit'])->name('books.edit');
+    Route::put('/books/{id}', [BooksController::class, 'update'])->name('books.update');
     Route::delete('books/{book}', [BooksController::class, 'destroy'])->name('books.destroy');
 
     // Categories
-    Route::get('categories', [CategoriesController::class, 'index'])->name('categories');
-    
+    Route::get('categories', [CategoriesController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{id}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 
     //Menu
     Route::get('menu', function () {

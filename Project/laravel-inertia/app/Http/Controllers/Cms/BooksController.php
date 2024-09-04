@@ -24,14 +24,21 @@ class BooksController extends Controller
 
     protected $manaCms;
 
-    public function index(): Response
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
         $books = Book::join('categories', 'books.category_id', '=', 'categories.id')
                 ->select('books.*', 'categories.category as category_name')
+                ->when($search, function ($query, $search) {
+                    $query->where('title', 'like', "%{$search}%")
+                          ->orWhere('author', 'like', "%{$search}%")
+                          ->orWhere('publisher', 'like', "%{$search}%");
+                })
                 ->get();
-        return Inertia::render('Books/Index', [
-            'books' => $books
-        ]);
+        return inertia('Books/Index', [
+            'books' => $books]
+        );
     }
     public function create()
     {
@@ -59,35 +66,31 @@ class BooksController extends Controller
         
         return redirect()->route('books.index')->with('success', 'Book added successfully!');    }
 
-        public function edit(Book $book) {
-            return Inertia::render('Books/Edit', [
-                'book' => [
-                    'id' => $book->id,
-                    'title' => $book->title,
-                    'author' => $book->author,
-                    'publisher' => $book->publisher,
-                    'category_id' => $book->category_id
-                ],
-            ]);
-        }
-    
-        public function update(Request $request, Book $book) {
-            $this->validate($request, [
-                'title' => 'required|string|max:255',
-                'author' => 'required|string|max:255',
-                'publisher' => 'required|string|max:255',
-                'category_id' => 'required|exists:categories,id'
-            ]);
-    
-            $book->update([
-                'title'     => $request->title,
-                'author'    => $request->author,
-                'publisher' => $request->publisher,
-                'category_id' => $request->category_id
-            ]);
-    
-            return redirect()->route('books.index')->with('success', 'Book Updated Successfully!');
-        }
+        public function edit($id)
+    {
+        $book = Book::with('category')->findOrFail($id);
+        $categories = Category::all(); // Mengambil semua kategori untuk pilihan dropdown
+
+        return inertia('Books/Edit', [
+            'book' => $book,
+            'categories' => $categories
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $book = Book::findOrFail($id);
+        $book->update($request->all());
+
+        return redirect()->route('books.index')->with('success', 'Book updated successfully.');
+    }
     
         public function destroy(Book $book)
         {
@@ -95,5 +98,12 @@ class BooksController extends Controller
     
             return redirect()->route('books.index')->with('success', 'Book Deleted Successfully!');
         }
+
+        public function restore(Book $book): RedirectResponse
+    {
+        $book->restore();
+
+        return Redirect::back()->with('success', 'Book restored.');
+    }
 }
 

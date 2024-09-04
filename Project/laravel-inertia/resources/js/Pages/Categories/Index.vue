@@ -28,8 +28,8 @@
           <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-gray-500">{{ category.id }}</td>
           <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-gray-500">{{ category.category }}</td>
           <td class="w-px border-t">
-            <Link :href="`/categories/${category.id}/edit`" :preserve-scroll :preserve-state class="btn-indigo  flex items-center px-auto" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+            <Link :href="`/categories/${category.id}/edit`" :preserve-scroll :preserve-state class="btn-indigo " tabindex="-1">
+              <icon name="cheveron-right" class="w-6 h-6 fill-gray-400" />
               Lihat Detail
             </Link>
           </td>

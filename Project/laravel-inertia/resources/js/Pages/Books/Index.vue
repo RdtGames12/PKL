@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head title="Books" />
-    <h1 class="mb-8 text-3xl font-bold">Books</h1>
+    <h1 class="mb-8 text-3xl text-blue-500 font-bold">Books</h1>
 
     <div class="flex items-center justify-between mb-6">
       <SearchFilter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
@@ -13,30 +13,32 @@
         <span class="hidden md:inline">&nbsp;Book</span>
       </Link>
     </div>
-
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
+    <div class="bg-white rounded-md shadow overflow-x-auto">
+    <table class="w-full whitespace-nowrap">
+      <thead class="bg-gray-200">
         <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Publisher</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Title</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Author</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Publisher</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Category</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Action</th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         <tr v-for="book in books" :key="book.id">
-          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ book.title }}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.author }}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.publisher }}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ book.category_name }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-gray-500">{{ book.title }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-gray-500">{{ book.author }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-gray-500">{{ book.publisher }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-gray-500">{{ book.category_name }}</td>
           <td class="w-px border-t">
-            <Link class="flex items-center px-4" :href="`/users/${user.id}/edit`" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+            <Link :href="`/books/${book.id}/edit`" :preserve-scroll :preserve-state class="btn-indigo" tabindex="-1">
+              <icon name="cheveron-right" class=" w-6 h-6 fill-gray-400" />Lihat Detail
             </Link>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </template>
 

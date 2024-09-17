@@ -1,6 +1,7 @@
 import '../css/app.css'
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+import { createApp, h } from 'vue';
+import { createInertiaApp } from '@inertiajs/vue3';
+import Layout from '@/Shared/Layout.vue';
 import { createPinia } from 'pinia'
 import axios from 'axios'
 

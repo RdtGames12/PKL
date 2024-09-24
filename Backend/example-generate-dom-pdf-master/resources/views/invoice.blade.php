@@ -34,7 +34,7 @@
         .header .right {
             text-align: right;
             font-size: 12px;
-            color: #333;
+            color: #000000;
         }
 
         .invoice-title {
@@ -57,8 +57,8 @@
             margin-top: 20px;
         }
 
-        .table th, .table td {
-            border: 1px solid #ddd;
+        .table th,
+        .table td {
             padding: 8px;
         }
 
@@ -75,6 +75,7 @@
             margin-top: 30px;
             font-size: 12px;
             text-align: center;
+            text-color: white;
         }
     </style>
 </head>
@@ -83,13 +84,17 @@
     <div class="container">
         <!-- Header Section -->
         <div class="header">
-            <div class="left">
-                <img src="logo.png" alt="logo">
-            </div>
             <div class="right">
-                <p>Villa Istana Bunga</p>
-                <p>Jl. Kolonel Masturi, Komplek Villa Istana Bunga, Blok N-85</p>
-                <p>Parongpong, Telepon: 0896-6447-2860</p>
+                <p><strong>Villa Istana Bunga</strong></p>
+                <p>Jl. Kolonel Masturi, Komplek Villa Istana Bunga</p>
+                <p> Blok N-85, Parongpong<br>Phone: 0896-6447-2860</p>
+            </div>
+            <div class="left">
+                @if ($logoBase64)
+                    <img src="{{ $logoBase64 }}" alt="logo" width="150" height="auto">
+                @else
+                    <p>Logo not available</p>
+                @endif
             </div>
         </div>
 
@@ -117,51 +122,47 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Pendaftaran Khusus Pasien Baru</td>
-                    <td>Rp 30.000</td>
-                    <td>1</td>
-                    <td>Rp 0</td>
-                    <td>Rp 30.000</td>
-                </tr>
-                <tr>
-                    <td>Bahan Valplast Gigi Pertama</td>
-                    <td>Rp 2.500.000</td>
-                    <td>1</td>
-                    <td>Rp 0</td>
-                    <td>Rp 2.500.000</td>
-                </tr>
-                <tr>
-                    <td>Pendaftaran Khusus Pasien Baru</td>
-                    <td>Rp 30.000</td>
-                    <td>1</td>
-                    <td>Rp 0</td>
-                    <td>Rp 30.000</td>
-                </tr>
-                <tr>
-                    <td>Aloclair Gel</td>
-                    <td>Rp 110.000</td>
-                    <td>1</td>
-                    <td>Rp 0</td>
-                    <td>Rp 110.000</td>
-                </tr>
+                @foreach ($transactions as $transaction)
+                    <tr>
+                        <td>{{ $transaction['nama'] }}</td>
+                        <td>Rp {{ number_format($transaction['harga'], 0, ',', '.') }}</td>
+                        <td>{{ $transaction['jumlah'] }}</td>
+                        <td>Rp {{ number_format($transaction['diskon'], 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($transaction['total'], 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
         <!-- Total Section -->
         <div class="total">
-            <p><strong>Subtotal:</strong> Rp 2.670.000</p>
-            <p><strong>Total Diskon Promo/Voucher:</strong> Rp 0</p>
-            <p><strong>Total Bayar:</strong> Rp 2.670.000</p>
-            <p><strong>Dibayarkan:</strong> Rp 2.670.000</p>
-            <p><strong>Utang Kembali:</strong> Rp 0</p>
+            <p><strong>Subtotal:</strong> Rp {{ number_format($subtotal, 0, ',', '.') }}</p>
+            <p><strong>Total Diskon Promo/Voucher/Referral:</strong> <span style="color: green;">Rp
+                    {{ number_format($totalDiskon, 0, ',', '.') }}</span></p>
+            <p><strong>Total Promo/Voucher Kode/Referral:</strong> <span style="color: green;">Rp
+                    {{ number_format($totalPromo, 0, ',', '.') }}</span></p>
+            <br>
+            <p><strong>Total Bayar:</strong> Rp {{ number_format($totalBayar, 0, ',', '.') }}</p>
+            <p><strong>Dibayarkan:</strong> Rp {{ number_format($dibayarkan, 0, ',', '.') }}</p>
+            <p><strong>Utang Kembali:</strong> Rp {{ number_format($utangKembali, 0, ',', '.') }}</p>
         </div>
 
+        <hr>
+        <table>
+            <tr>
+                <td style="text-align: left;">
+                    <p>Metode Pembayaran: CASH</p>
+                </td>
+                <td style="text-align: right; padding-left: 50%;">
+                    <p>Tanggal Pembayaran: 23 November 2023 - 12:30 WIB</p>
+                </td>
+            </tr>
+        </table>
+        <hr>
         <!-- Footer Section -->
         <div class="footer">
-            <p>Metode Pembayaran: CASH</p>
-            <p>Tanggal Pembayaran: 23 November 2023 - 12:30 WIB</p>
-            <p style="background-color: #005eb8; text-color: white; margin-bottom: 15%;">Passion Dental Care www.passiondentalcare.com/</p>
+            <p style="background-color: #005eb8; margin-top: 5%;"><span style="color: rgb(255, 255, 255);">Passion Dental Care
+                www.passiondentalcare.com/</span></p>
         </div>
     </div>
 </body>

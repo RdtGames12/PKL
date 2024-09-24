@@ -143,7 +143,7 @@
               </div>
               <div class="brutalist-card__actions">
                 <a class="brutalist-card__button brutalist-card__button--mark" href="{{ route ('invoice') }}"
-                  >Invoice Action</a
+                  >Invoice</a
                 >
                 <a class="brutalist-card__button brutalist-card__button--mark" href="{{ route ('invoicepasien') }}"
                 >Invoice Pasien</a
